@@ -1,23 +1,11 @@
-# Virtual Environment
-.venv/
+# Abaikan Virtual Environment Python
 venv/
+.venv/
+env/
 
-# Cache Python
+# Abaikan folder cache Python
 __pycache__/
 *.pyc
-*.pyo
-*.pyd
 
-# Konfigurasi VS Code
+# Abaikan file konfigurasi VS Code lokal (opsional)
 .vscode/
-
-# File Environment
-.env
-
-# File hasil build
-build/
-dist/
-*.egg-info/
-
-# Log
-*.log
