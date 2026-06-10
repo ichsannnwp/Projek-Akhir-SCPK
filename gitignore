@@ -1,0 +1,23 @@
+# Virtual Environment
+.venv/
+venv/
+
+# Cache Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Konfigurasi VS Code
+.vscode/
+
+# File Environment
+.env
+
+# File hasil build
+build/
+dist/
+*.egg-info/
+
+# Log
+*.log
