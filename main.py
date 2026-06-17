@@ -369,7 +369,7 @@ elif page == "🔍 Cek Laptop":
 
     st.markdown("---")
 
-    if st.button("🚀 Hitung Kelayakan", type="primary", use_container_width=True):
+    if st.button("🚀 Hitung Kelayakan", type="primary", width='stretch'):
         params     = bangun_params(profil_key)
         bobot_norm = np.array(info_profil["bobot"], dtype=float) / sum(info_profil["bobot"])
         skor       = tsukamoto_score(cpu_val, gpu_val, ram_val, storage_val, harga_val, params, bobot_norm)
@@ -466,7 +466,7 @@ elif page == "🔍 Cek Laptop":
             })
 
         df_detail = pd.DataFrame(rows_detail).set_index("Kriteria")
-        st.dataframe(df_detail, use_container_width=True)
+        st.dataframe(df_detail, width='stretch')
 
         # Plot kontribusi
         fig, ax = plt.subplots(figsize=(10, 3.5))
@@ -486,7 +486,7 @@ elif page == "🔍 Cek Laptop":
         ax.spines['top'].set_visible(False)
         ax.spines['right'].set_visible(False)
         plt.tight_layout()
-        st.pyplot(fig, use_container_width=True)
+        st.pyplot(fig, width='stretch')
 
         # Rekomendasi laptop serupa yang lebih layak (jika tidak lolos)
         if skor < 0.55:
@@ -502,7 +502,7 @@ elif page == "🔍 Cek Laptop":
                 df_rec_show = df_rec[["Model", "RAM", "Storage", "Price_USD", "multiScore", "3DMark", "Skor"]].copy()
                 df_rec_show.columns = ["Model","RAM(GB)","Storage(GB)","Harga(USD)","CPU Score","GPU Score","Skor Tsukamoto"]
                 df_rec_show.index = range(1, len(df_rec_show)+1)
-                st.dataframe(df_rec_show, use_container_width=True)
+                st.dataframe(df_rec_show, width='stretch')
             else:
                 st.info("Tidak ada laptop di dataset yang memenuhi ambang kelayakan untuk profil ini.")
 
@@ -543,7 +543,7 @@ elif page == "📊 Ranking Semua Laptop":
     kolom_show = ["Model","RAM","Storage","Price_USD","multiScore","3DMark","Skor_Tsukamoto","Kelayakan"]
     df_show = df_filtered[kolom_show].copy()
     df_show.columns = ["Model","RAM(GB)","Storage(GB)","Harga(USD)","CPU Score","GPU Score","Skor Tsukamoto","Kelayakan"]
-    st.dataframe(df_show, use_container_width=True)
+    st.dataframe(df_show, width='stretch')
 
     # Top 10 bar chart
     st.markdown("### 📊 Top 10 Laptop Terbaik")
@@ -568,7 +568,7 @@ elif page == "📊 Ranking Semua Laptop":
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
     plt.tight_layout()
-    st.pyplot(fig, use_container_width=True)
+    st.pyplot(fig, width='stretch')
 
 
 # ─────────────────────────────────────────────────────────────────────
@@ -593,7 +593,7 @@ elif page == "📐 Transparansi Fuzzy":
             "Bobot (w)":       np.round(bobot_norm, 4),
         })
         df_par.index = df_par.index + 1
-        st.dataframe(df_par, use_container_width=True)
+        st.dataframe(df_par, width='stretch')
 
     with st.expander("📏 Rule Base Fuzzy Tsukamoto", expanded=True):
         st.markdown("**10 Rule aktif** (2 rule per kriteria × 5 kriteria):")
@@ -611,7 +611,7 @@ elif page == "📐 Transparansi Fuzzy":
         ]
         df_rules = pd.DataFrame(rules_text, columns=["Rule","Kriteria","Himpunan","Konsekuen","Sifat"])
         df_rules.index = df_rules.index
-        st.dataframe(df_rules, use_container_width=True)
+        st.dataframe(df_rules, width='stretch')
 
     with st.expander("🔢 Tabel Derajat Keanggotaan Semua Laptop", expanded=False):
         st.caption("Derajat μ setiap laptop pada himpunan fuzzy masing-masing kriteria:")
@@ -631,7 +631,7 @@ elif page == "📐 Transparansi Fuzzy":
                 "μ Harga Mahal":   round(mf_naik( r["Price_USD"],  params["harga_mahal_a"], params["harga_mahal_b"]), 4),
             })
         df_mu = pd.DataFrame(rows_mu).set_index("Model")
-        st.dataframe(df_mu, use_container_width=True)
+        st.dataframe(df_mu, width='stretch')
 
 
 # ─────────────────────────────────────────────────────────────────────
@@ -675,7 +675,7 @@ elif page == "📈 Visualisasi":
     ax1.spines['top'].set_visible(False)
     ax1.spines['right'].set_visible(False)
     plt.tight_layout()
-    st.pyplot(fig1, use_container_width=True)
+    st.pyplot(fig1, width='stretch')
 
     # Grafik 2: Fungsi Keanggotaan (5 panel)
     st.subheader("📐 Fungsi Keanggotaan Fuzzy per Kriteria")
@@ -714,7 +714,7 @@ elif page == "📈 Visualisasi":
 
     plt.suptitle(f"Fungsi Keanggotaan – Profil {profil_key}", fontsize=12, fontweight='bold', y=1.03)
     plt.tight_layout()
-    st.pyplot(fig2, use_container_width=True)
+    st.pyplot(fig2, width='stretch')
 
     # Grafik 3: Scatter Harga vs Skor
     st.subheader("💰 Scatter: Harga vs Skor Kelayakan")
@@ -735,4 +735,4 @@ elif page == "📈 Visualisasi":
     ax3.spines['top'].set_visible(False)
     ax3.spines['right'].set_visible(False)
     plt.tight_layout()
-    st.pyplot(fig3, use_container_width=True)
+    st.pyplot(fig3, width='stretch')
